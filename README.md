@@ -1,7 +1,10 @@
 # Telomere_Assembly_pipeline
 De Novo Genome assembly and telomere analysis pipeline for C. elegans long-read sequencing (PacBio)
 
-## Pipeline Workflow
+
+
+
+
 
 ###  Input Data
 PacBio HiFi CCS reads were obtained from the sequencing facility in BAM format.
