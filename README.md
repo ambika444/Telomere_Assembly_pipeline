@@ -106,11 +106,28 @@ Metrics of interest include:
 - Contig N50 and L50
 - Contig N90 and L90
 
-Example:
+### Example Assembly Results: bc2043
 
-    seqkit stats -a assembly.fasta
+PacBio HiFi reads from sample bc2043 were assembled using Hifiasm on the UNC Longleaf high-performance computing cluster. Assembly statistics were calculated using SeqKit from the assembled FASTA file (`bc2043.contigs.fa`).
 
-Assembly statistics and example outputs will be added as the repository documentation develops.
+| Assembly metric | Result |
+|---|---:|
+| Number of contigs | 35 |
+| Total assembly length | 105,423,457 bp (105.42 Mb) |
+| Mean contig length | 3,012,098.8 bp |
+| Shortest contig | 13,778 bp |
+| Longest contig | 18,507,730 bp |
+| Contig N50 | 8,809,122 bp (8.81 Mb) |
+| GC content | 35.49% |
+| Total gap bases | 0 |
+
+**Command used:**
+
+```bash
+seqkit stats -a bc2043.contigs.fa
+```
+
+The assembly comprised 35 contigs spanning approximately 105.42 Mb, with a contig N50 of 8.81 Mb and a maximum contig length of 18.51 Mb. These statistics describe assembly contiguity and sequence composition. Additional validation is required to assess assembly completeness, structural accuracy, and recovery of chromosome-terminal telomeric regions.
 
 ## 6. Telomere Identification and Analysis
 
