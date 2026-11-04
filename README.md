@@ -131,27 +131,63 @@ The assembly comprised 35 contigs spanning approximately 105.42 Mb, with a conti
 
 ## 6. Telomere Identification and Analysis
 
-The downstream workflow focuses on identifying and characterizing telomeric DNA sequences in assembled *C. elegans* chromosomes.
+The downstream analysis focused on identifying candidate telomere-containing contigs from the Hifiasm assembly of *Caenorhabditis elegans*.
 
-The canonical telomeric repeat is:
+### Identification of Telomeric Repeats
 
-`TTAGGC`
+A custom Python script was used to scan the first and last 1,000 bp of each assembled contig for consecutive canonical telomeric repeats.
 
-The analysis includes identification of telomere-containing contigs, extraction of chromosome-end regions, measurement of telomeric tract length, and characterization of noncanonical repeat sequences.
+The canonical *C. elegans* telomeric repeat is `TTAGGC`, with reverse-complement sequence `GCCTAA`.
 
-Custom analysis scripts and examples will be documented in this section.
+Candidate telomeric contig ends were identified using the following criteria:
+
+- Minimum of 10 consecutive perfect telomeric repeats.
+- Search restricted to the first and last 1,000 bp of each contig.
+- Both forward and reverse-complement repeat orientations examined.
+- Contig ID, length, repeat orientation, and maximum consecutive repeat count reported.
+
+**Script:** [identify_telomere_contigs.py](scripts/identify_telomere_contigs.py)
+
+### Example Command
+
+```bash
+python scripts/identify_telomere_contigs.py bc2043.contigs.fa
+```
+To save the results:
+
+```bash
+python scripts/identify_telomere_contigs.py bc2043.contigs.fa \
+    > bc2043_telomere_candidates.txt
+```
+
+### Expected Output Format
+
+The script reports contigs meeting the repeat threshold. For example, the following is an illustrative output, not an actual bc2043 result:
+
+```text
+Contig: ptg000001l
+  Length: 5000000 bp
+  START forward: 15 consecutive repeats
+```
+
+### Interpretation and Limitations
+
+This approach provides an initial screen for candidate telomere-containing contigs based on consecutive perfect repeats near contig ends.
+
+It does not independently confirm chromosome-end identity, measure complete telomere tract length, or detect all interrupted and noncanonical telomeric repeat patterns.
+
+Further analysis is required to assign contigs to chromosomes, characterize telomeric sequence variation, and evaluate telomere–subtelomere boundaries.
 
 ## Repository Structure
 
-    Telomere_Assembly_pipeline/
-    ├── README.md
-    └── scripts/
-        ├── bam_to_fastq.sh
-        ├── run_fastqc.sh
-        ├── basic_stats.sh
-        └── run_hifiasm_longleaf.sh
-
-Additional example results, figures, and downstream telomere analysis scripts will be added as they become available for sharing.
+   Telomere_Assembly_pipeline/
+├── README.md
+└── scripts/
+    ├── bam_to_fastq.sh
+    ├── run_fastqc.sh
+    ├── basic_stats.sh
+    ├── run_hifiasm_longleaf.sh
+    └── identify_telomere_contigs.py
 
 ## Reproducibility
 
